@@ -5,12 +5,15 @@ const SALT_ROUNDS = 10;
 
 class UserService extends Service {
   async login({ username, password }) {
-    const user = await this.ctx.model.User.findOne({ username: username });
+    let user = await this.ctx.model.User.findOne({ username: username });
     if (user) {
+      user = user.toObject();
       const result = await bcrypt.compare(password, user.password);
       if (result) {
-        user.password = '********';
-        return user;
+          user.password = '********';
+          const permissions = await this.ctx.model.Permission.find({ userId: user._id });
+          user.permissions = permissions;
+          return user;
       }
     }
     return null;

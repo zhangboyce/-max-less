@@ -11,7 +11,7 @@ if (!arguments || arguments.length == 0) {
 let types = [].slice.call(arguments);
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://192.168.100.83:27017/example');
+mongoose.connect('mongodb://127.0.0.1:27017/max_less');
 
 var db = mongoose.connection;
 db.once('open', async () => {

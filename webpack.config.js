@@ -17,7 +17,8 @@ module.exports = {
     entry: ["babel-polyfill", path.resolve(dir_src, 'main.jsx')],
     output: {
         path: dir_build, // for standalone building
-        filename: 'bundle.min.js'
+        filename: 'bundle.min.js',
+        publicPath: '/'
     },
     node: {
         fs: 'empty',

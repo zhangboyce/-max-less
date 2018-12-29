@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
 
-class OrderContainer extends Component {
+class UserContainer extends Component {
     constructor(props) {
         super(props);
     }
@@ -16,7 +16,7 @@ class OrderContainer extends Component {
                 <div className="row">
                     <div className="col-12">
                         <div className="card">
-                            OrderContainer
+                            UserContainer
                         </div>
                     </div>
                 </div>
@@ -39,4 +39,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(withRouter(OrderContainer));
+)(withRouter(UserContainer));

@@ -36,7 +36,7 @@
                 font-family: "Roboto", sans-serif;
                 text-transform: uppercase;
                 outline: 0;
-                background: #4CAF50;
+                background: rgb(30, 69, 41);
                 width: 100%;
                 border: 0;
                 padding: 15px;
@@ -47,7 +47,7 @@
                 cursor: pointer;
             }
             .form button:hover,.form button:active,.form button:focus {
-                background: #43A047;
+                background: rgb(30, 69, 41);
             }
             .form .message {
                 margin: 15px 0 0;
@@ -55,7 +55,7 @@
                 font-size: 12px;
             }
             .form .message a {
-                color: #4CAF50;
+                color: rgb(30, 69, 41);
                 text-decoration: none;
             }
             .form .register-form {
@@ -95,11 +95,11 @@
                 color: #EF3B3A;
             }
             body {
-                background: #76b852; /* fallback for old browsers */
-                background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-                background: -moz-linear-gradient(right, #76b852, #8DC26F);
-                background: -o-linear-gradient(right, #76b852, #8DC26F);
-                background: linear-gradient(to left, #76b852, #8DC26F);
+                background: rgb(29, 29, 40); /* fallback for old browsers */
+                background: -webkit-linear-gradient(right, rgb(29, 29, 40), rgb(29, 29, 40));
+                background: -moz-linear-gradient(right, rgb(29, 29, 40), rgb(29, 29, 40));
+                background: -o-linear-gradient(right, rgb(29, 29, 40), rgb(29, 29, 40));
+                background: linear-gradient(to left, rgb(29, 29, 40), rgb(29, 29, 40));
                 font-family: "Roboto", sans-serif;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
@@ -110,43 +110,43 @@
     <body>
         <div class="login-page">
             <div class="form">
-                <form class="register-form">
-                    <input type="text" name="username" placeholder="name" required="required"/>
-                    <input type="password" name="password" placeholder="password" required="required"/>
-                    <button type="button" id="create">create</button>
-                    <p class="message">Already registered? <a id="toLogin" href="javascript:;">Sign In</a></p>
-                </form>
+                <!--<form class="register-form">-->
+                    <!--<input type="text" name="username" placeholder="name" required="required"/>-->
+                    <!--<input type="password" name="password" placeholder="password" required="required"/>-->
+                    <!--<button type="button" id="create">create</button>-->
+                    <!--<p class="message">Already registered? <a id="toLogin" href="javascript:;">Sign In</a></p>-->
+                <!--</form>-->
                 <form class="login-form" method="post" action="/xauth/login">
                     <input type="text" name="username" placeholder="username" required="required"/>
                     <input type="password" name="password" placeholder="password" required="required"/>
                     <button type="submit">login</button>
-                    <p class="message">Not registered? <a id="toRegister" href="javascript:;">Create an account</a></p>
+                    <!--<p class="message">Not registered? <a id="toRegister" href="javascript:;">Create an account</a></p>-->
                 </form>
             </div>
         </div>
         <script>
-            $('#toRegister').click(function () {
-                $('.register-form').show();
-                $('.login-form').hide();
-            })
-            $('#toLogin').click(function () {
-                $('.register-form').hide();
-                $('.login-form').show();
-            })
+            // $('#toRegister').click(function () {
+            //     $('.register-form').show();
+            //     $('.login-form').hide();
+            // })
+            // $('#toLogin').click(function () {
+            //     $('.register-form').hide();
+            //     $('.login-form').show();
+            // })
 
-            $('#create').click(function () {
-                var username = $('.register-form input[name="username"]').val();
-                var password = $('.register-form input[name="password"]').val();
-
-                $.post('/register', { username, password }, function (result) {
-                    if (result.status === true) {
-                        alert('恭喜你注册成功, 请登录。');
-                        window.location.href = '/login'
-                    } else {
-                        alert('很抱歉注册失败, 原因: ' + result.msg);
-                    }
-                });
-            })
+            // $('#create').click(function () {
+            //     var username = $('.register-form input[name="username"]').val();
+            //     var password = $('.register-form input[name="password"]').val();
+            //
+            //     $.post('/api/register', { username, password }, function (result) {
+            //         if (result.status === true) {
+            //             alert('恭喜你注册成功, 请登录。');
+            //             window.location.href = '/login'
+            //         } else {
+            //             alert('很抱歉注册失败, 原因: ' + result.msg);
+            //         }
+            //     });
+            // })
 
         </script>
     </body>

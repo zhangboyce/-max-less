@@ -4,10 +4,12 @@ module.exports = app => {
   const Schema = mongoose.Schema;
 
   const UserSchema = new Schema({
-    username: { type: String },
-    password: { type: String },
-    phone: { type: String },
-    createDate: { type: Date, default: Date.now },
+      _id: { type: String },
+      username: { type: String },
+      password: { type: String },
+      phone: { type: String },
+      sex: { type: Number },
+      createDate: { type: Date, default: Date.now },
   });
 
   return mongoose.model('User', UserSchema, null, { cache: false });

@@ -1,8 +1,6 @@
 'use strict';
 
 const Controller = require('egg').Controller;
-const path = require('path');
-const fs = require('fs');
 
 class HomeController extends Controller {
   async index() {
@@ -11,7 +9,7 @@ class HomeController extends Controller {
       this.ctx.redirect('/login');
     } else {
       const host = this.app.config.host;
-      const user = this.ctx.session.passport.user;
+      const user = this.ctx.user;
       await this.ctx.render('index.html', { host, user });
     }
   }

@@ -5,7 +5,9 @@ const path = require('path');
 module.exports = appInfo => {
   const config = exports = {};
   config.keys = appInfo.name + '_1534318347853_5766';
-  config.host = 'http://127.0.0.1:7001/';
+  config.host = 'http://127.0.0.1:7001';
+
+  config.middleware = [ 'auth', 'admin' ];
 
   config.security = {
     csrf: {
@@ -33,6 +35,10 @@ module.exports = appInfo => {
     buffer: false,
     maxFiles: 1000,
   };
+
+  // config.notfound = {
+  //     pageUrl: '/static/views/index.html',
+  // };
 
   config.passportLocal = {
     usernameField: 'username',

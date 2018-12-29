@@ -2,3 +2,33 @@
     border-radius: unset;
     width: 50px;
 }
+
+.navbar-wrapper .logo {
+
+}
+
+.navbar-wrapper .logo img {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+}
+
+.navbar-wrapper .logo .logo-img {
+    display: inline-block;
+    padding: 4px;
+}
+
+.navbar-wrapper .logo .simple-text {
+    color: white;
+    font-size: 16px;
+}
+
+.sidebar .shop-dropdown {
+    border-bottom: 1px solid white;
+}
+
+.sidebar .shop-dropdown .shop-name {
+    text-align: center;
+    color: white;
+    font-weight: bold;
+}
