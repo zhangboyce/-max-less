@@ -10,6 +10,9 @@ module.exports = app => {
     router.post('/api/admin/register', controller.user.register);
     router.get('/api/shop/list', controller.shop.list);
     router.get('/api/menu/list', controller.menu.list);
+    router.get('/api/option/list', controller.option.list);
+
+    router.post('/api/order/save', controller.order.save);
 
     router.get('/*', controller.home.index);
 };

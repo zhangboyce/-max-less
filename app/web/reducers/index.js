@@ -7,12 +7,23 @@ import menuCombineReducers from './menu';
 export default combineReducers({
     user,
     shop,
-    menu
+    menu,
+    options
 });
 
 function user(state = {  }, action) {
     switch (action.type) {
         case types.USER_INFO: {
+            return action.data;
+        }
+        default:
+            return state;
+    }
+}
+
+function options(state = {  }, action) {
+    switch (action.type) {
+        case types.ORDER_OPTIONS: {
             return action.data;
         }
         default:

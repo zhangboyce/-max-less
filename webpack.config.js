@@ -40,7 +40,7 @@ module.exports = {
                         }
                     }
                 ],
-                exclude: /node_modules\/(?!(koa-sso-auth-cli|koa-generic-session|koa-router)\/).*/
+                exclude: /node_modules/
             },
             {
                 test: /\.css$/,

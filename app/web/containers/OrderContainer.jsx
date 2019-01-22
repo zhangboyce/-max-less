@@ -4,35 +4,37 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { withRouter } from 'react-router-dom';
 
+import OrderForm from '../components/order/OrderForm';
+
+import * as AppActions from "../actions/app";
+import * as OrderActions from "../actions/order";
 
 class OrderContainer extends Component {
     constructor(props) {
         super(props);
     }
 
+    componentDidMount() {
+        this.props.actions.listOptions(this.props.currentShop._id);
+    }
+
     render() {
         return (
-            <div className="content">
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card">
-                            OrderContainer
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <OrderForm options={ this.props.options } />
         );
     }
 }
 
 const mapStateToProps = state => {
     return {
+        options: state.options,
+        currentShop: state.shop.current
     }
 };
 
 const mapDispatchToProps = dispatch => {
     return {
-        actions: bindActionCreators(Object.assign({}, {}), dispatch)
+        actions: bindActionCreators(Object.assign({}, AppActions, OrderActions), dispatch)
     }
 };
 
