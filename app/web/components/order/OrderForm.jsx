@@ -5,12 +5,33 @@ import OrderFormPart from './OrderFormPart';
 import GlassesFormPart from './GlassesFormPart';
 import DegreeFormPart from './DegreeFormPart';
 import { Card, CardFooter, Button, Row, Col } from "reactstrap"
+import NotificationAlert from "react-notification-alert";
 import $ from 'jquery';
+import moment from 'moment';
 
 export default class extends Component {
     constructor(props) {
         super(props);
         this.state = this.initState();
+    }
+
+    componentDidMount() {
+        let updateOrder = this.props.order;
+        if (updateOrder) {
+            let initOrder = this.initState().order;
+
+            let newOrder = Object.assign({}, initOrder, updateOrder);
+            newOrder.orderTime = moment(newOrder.orderTime).format('YYYY-MM-DD hh:mm:ss');
+
+            let consumer = updateOrder.consumer;
+            if (consumer) {
+                newOrder.name = consumer.name;
+                newOrder.phone = consumer.phone;
+                newOrder.sex = consumer.sex;
+                newOrder.channel = consumer.channel;
+            }
+            this.setState({ order: newOrder });
+        }
     }
 
     initState = () => {
@@ -29,7 +50,7 @@ export default class extends Component {
                 rightAstigmatismAxis: '',
 
                 price: '',
-                orderTime: '',
+                orderTime: moment().format("YYYY-MM-DD hh:mm:ss"),
                 address: '',
                 payType: '',
                 orderStatus: '',
@@ -64,8 +85,8 @@ export default class extends Component {
                 // // OrderFormPart
                 // price: this.isNumber(),
                 orderTime: {
-                    isValidated: false,
-                    isValid: false,
+                    isValidated: true,
+                    isValid: true,
                     // YYYY-MM-DD hh:mm
                     regex: /^20\d{2}(\-\d{1,2}){2}\s+\d{2}:\d{2}(:\d{2})?$/
                 },
@@ -122,10 +143,10 @@ export default class extends Component {
         let valid = {[name]: this.__validate__(name)};
 
         this.setState({ validation: Object.assign({}, this.state.validation, valid) }, () => {
-            let canSubmit = Object.keys(this.state.validation).map(key => this.isValid(key)).reduce((a, b)=> a && b);
-            this.setState({ canSubmit });
-
-            console.log('valid>>> ', this.state.validation, 'canSubmit: ' + canSubmit)
+            // let canSubmit = Object.keys(this.state.validation).map(key => this.isValid(key)).reduce((a, b)=> a && b);
+            // this.setState({ canSubmit });
+            //
+            // console.log('valid>>> ', this.state.validation, 'canSubmit: ' + canSubmit)
         });
     };
 
@@ -153,27 +174,59 @@ export default class extends Component {
         console.log('>> ', order);
     };
 
+    notify = (status, msg) => {
+        this.refs.notificationAlert.notificationAlert({
+            place: 'tc',
+            message: (
+                <div>{ msg }</div>
+            ),
+            type: status ? 'success' : 'warning',
+            icon: "tim-icons icon-bell-55",
+            autoDismiss: 7
+        });
+    };
+
     handleSave = () => {
         let validation = {};
         Object.keys(this.state.validation).forEach(key => Object.assign(validation, { [key]: this.__validate__(key) }));
-        let canSubmit = Object.keys(validation).map(key => this.isValid(key)).reduce((a, b)=> a && b);
+        let canSubmit = Object.keys(validation).map(key => validation[key].isValidated && validation[key].isValid).reduce((a, b)=> a && b);
+
+        console.log(validation, canSubmit);
 
         this.setState({ validation, canSubmit });
         if (!canSubmit) return;
 
-        $.post('/api/order/save', { order: this.state.order }, json => {
-            if (json.status) {
-                alert('保存成功!');
-                this.setState(this.initState())
-            } else {
-                alert('保存失败!');
-            }
-        });
+        if (this.state.order._id) {
+            $.post('/api/order/update', { order: this.state.order }, json => {
+                if (json.status) {
+                    this.notify(true, '更新成功');
+                } else {
+                    this.notify(false, '更新失败：' + json.msg);
+                }
+            });
+        } else {
+            $.post('/api/order/save', { shopId: this.props.shop._id, order: this.state.order }, json => {
+                if (json.status) {
+                    this.notify(true, '保存成功');
+                    this.setState(this.initState());
+                } else {
+                    this.notify(false, '保存失败：' + json.msg);
+                }
+            });
+        }
+    };
+
+    handleCancel = () => {
+        this.setState(this.initState());
+        this.props.onCancel();
     };
 
     render() {
         return (
             <div className="content max-less-form">
+                <div className="react-notification-alert-container">
+                    <NotificationAlert ref="notificationAlert" />
+                </div>
                 <Row>
                     <ConsumerFormPart
                         order={ this.state.order }
@@ -209,6 +262,7 @@ export default class extends Component {
                         <Card>
                             <CardFooter>
                                 <Button onClick={ this.handleSave } disabled={ !this.state.canSubmit }>保存</Button>
+                                <Button onClick={ this.handleCancel }>返回</Button>
                             </CardFooter>
                         </Card>
                     </Col>

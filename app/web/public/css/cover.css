@@ -36,3 +36,27 @@
 .max-less-form .row {
     margin-bottom: 10px;
 }
+
+.page-item.active .page-link {
+    border-color: white;
+}
+
+.content tr > td,
+.content tr > th {
+    white-space: nowrap;
+    word-break: keep-all;
+}
+
+.content table tbody tr:nth-child(odd) {
+    background-color: rgb(37, 38, 59);
+}
+
+.content a.operator {
+    cursor: pointer;
+    padding: 0 5px;
+    font-size: 14px;
+}
+
+.content a.operator:hover {
+    text-decoration: underline;
+}

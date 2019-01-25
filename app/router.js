@@ -13,6 +13,10 @@ module.exports = app => {
     router.get('/api/option/list', controller.option.list);
 
     router.post('/api/order/save', controller.order.save);
+    router.post('/api/order/update', controller.order.update);
+    router.get('/api/order/list', controller.order.list);
+    router.post('/api/order/delete', controller.order.delete);
+    router.get('/api/order/date/options', controller.order.dateOptions);
 
     router.get('/*', controller.home.index);
 };
