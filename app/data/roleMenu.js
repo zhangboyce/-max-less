@@ -2,23 +2,25 @@ let role_menus = [
     {
         _id: "admin",
         menus: [
-            'Dashboard',
-            'shop_manage',
-            'user_manage',
+            // 'Dashboard',
+            // 'shop_manage',
             'order_manage',
             'stat_manage',
+            'user_manage',
         ]
     },
     {
         _id: "shop_manager",
         menus: [
             'order_manage',
+            'stat_manage',
         ]
     },
     {
         _id: "shop_salesman",
         menus: [
             'order_manage',
+            'stat_manage',
         ]
     }
 ];

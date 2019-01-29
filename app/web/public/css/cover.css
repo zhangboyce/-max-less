@@ -60,3 +60,7 @@
 .content a.operator:hover {
     text-decoration: underline;
 }
+
+.react-datepicker__time-list-item {
+    color: #0a0c0d;
+}

@@ -16,7 +16,8 @@ export default class extends Component {
                 size: 10,
                 total: 12
             },
-            orders: []
+            orders: [],
+            totalPrice: 0
         };
     }
 
@@ -100,7 +101,8 @@ export default class extends Component {
             if (json.status) {
                 this.setState({
                     page: Object.assign({}, this.state.page, { total: json.result.total }),
-                    orders: json.result.list
+                    orders: json.result.list,
+                    totalPrice: json.result.totalPrice
                 });
             }
         });
@@ -131,6 +133,11 @@ export default class extends Component {
                                             onClick={ this.handleChangeYear(key) }
                                             color={ this.state.currentYear + '' === key ? 'primary' : 'info' }>{ key }年</Button>
                                     ))}
+
+                                    <Button
+                                        style={{padding: '5px 30px'}}
+                                        onClick={ this.props.onNew }
+                                        color="info">新建</Button>
                                 </div>
                                 <div>
                                     {
@@ -197,7 +204,7 @@ export default class extends Component {
                                                         <a className="operator" onClick={ this.handleUpdate(order)}>编辑</a>
                                                         <a className="operator" onClick={ this.handleDelete(order._id) }>删除</a>
                                                     </td>
-                                                    <td className="text-center">{ moment(order.createDate).format('YYYY-MM-DD hh:mm:ss') }</td>
+                                                    <td className="text-center">{ moment(order.orderTime).format('YYYY-MM-DD HH:mm:ss') }</td>
                                                     <td className="text-center">{ order.orderStatus }</td>
                                                     <td className="text-center">{ order.consumer && order.consumer.name }</td>
                                                     <td className="text-center">{ order.consumer && order.consumer.phone }</td>
@@ -206,7 +213,7 @@ export default class extends Component {
                                                     <td className="text-center">{ order.address }</td>
                                                     <td className="text-center">{ order.revisitStatus }</td>
                                                     <td className="text-center">{ order.price }</td>
-                                                    <td className="text-center">{ order.serviceUser && order.serviceUser.name }</td>
+                                                    <td className="text-center">{ order.serviceUser && order.serviceUser.username }</td>
                                                     <td className="text-center">{ order.payType  }</td>
                                                     <td className="text-center">{ moment(order.orderTime).format('YYYY-MM-DD hh:mm:ss') }</td>
                                                     <td className="text-center">{ order.lensBrand  }</td>
@@ -236,9 +243,9 @@ export default class extends Component {
                                     this.state.page.total <=0 && '暂无订单数据!'
                                 }
                             </CardBody>
-                            <CardFooter>
-                                {
-                                    this.__totalPage__() > 1 &&
+                            {
+                                this.__totalPage__() > 1 &&
+                                <CardFooter>
                                     <Pagination size="sm" aria-label="Page navigation example">
                                         <PaginationItem disabled={ this.state.page.index === 1 }>
                                             <PaginationLink previous onClick={ this.handleChangePage(this.state.page.index - 1) } />
@@ -256,8 +263,15 @@ export default class extends Component {
                                             <PaginationLink next onClick={ this.handleChangePage(this.state.page.index + 1) }  />
                                         </PaginationItem>
                                     </Pagination>
-                                }
-                            </CardFooter>
+                                </CardFooter>
+                            }
+                        </Card>
+                    </Col>
+                    <Col md="12">
+                        <Card>
+                            <CardBody>
+                                合计：{ this.state.totalPrice } 元
+                            </CardBody>
                         </Card>
                     </Col>
                 </Row>

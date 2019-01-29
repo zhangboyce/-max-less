@@ -40,7 +40,7 @@ export default class  extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="3">
                                 <Option label="性别"
                                         name="sex"
                                         value={ this.props.order.sex }
@@ -49,7 +49,7 @@ export default class  extends Component {
                                         onValidate={ this.props.onValidate }
                                         options={ this.props.options['sex'] } />
                             </Col>
-                            <Col className="px-md-1" md="6">
+                            <Col className="px-md-1" md="3">
                                 <Option label="渠道"
                                         name="channel"
                                         value={ this.props.order.channel }
@@ -57,6 +57,14 @@ export default class  extends Component {
                                         isInvalid={ this.props.isInvalid }
                                         onValidate={ this.props.onValidate }
                                         options={ this.props.options['channel'] } />
+                            </Col>
+                            <Col className="pr-md-1" md="6">
+                                <label>邮寄地址</label>
+                                <Input type="text" name="address"
+                                       value={ this.props.order.address }
+                                       invalid={ this.props.isInvalid('address') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
                             </Col>
                         </Row>
                     </CardBody>

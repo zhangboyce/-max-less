@@ -15,10 +15,17 @@ import * as ShopActions from './actions/shop';
 class Sidebar extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            currentPath: ''
+        };
     }
 
     componentDidMount() {
         this.props.actions.listShops();
+        this.props.history.listen((route) => {
+            this.setState({ currentPath: route.pathname })
+        });
+        this.setState({ currentPath: this.props.location.pathname })
     }
 
     componentWillReceiveProps(nextProps) {
@@ -32,6 +39,13 @@ class Sidebar extends Component {
         return () => {
             if (shop._id === this.props.currentShop._id) return;
             this.props.actions.selectShop({ shop });
+        };
+    };
+
+    changeMenu = (menu) => {
+        return () => {
+            if (menu._id === this.props.currentMenu._id) return;
+            this.props.actions.selectMenu({ menu });
         };
     };
 
@@ -67,7 +81,7 @@ class Sidebar extends Component {
                         {
                             this.props.menus.map(menu => (
                                 <li key={ menu._id }
-                                    className={ this.props.currentMenu._id === menu._id ? 'active': '' }>
+                                    className={ this.state.currentPath === menu.path ? 'active': '' }>
                                     <Link to={ menu.path } className="nav-link">
                                         <i className={ menu.icon } />
                                         <p>{ menu.name }</p>

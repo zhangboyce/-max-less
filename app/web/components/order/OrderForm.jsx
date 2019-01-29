@@ -8,6 +8,8 @@ import { Card, CardFooter, Button, Row, Col } from "reactstrap"
 import NotificationAlert from "react-notification-alert";
 import $ from 'jquery';
 import moment from 'moment';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default class extends Component {
     constructor(props) {
@@ -21,7 +23,7 @@ export default class extends Component {
             let initOrder = this.initState().order;
 
             let newOrder = Object.assign({}, initOrder, updateOrder);
-            newOrder.orderTime = moment(newOrder.orderTime).format('YYYY-MM-DD hh:mm:ss');
+            newOrder.orderTime = moment(newOrder.orderTime).format('YYYY-MM-DD HH:mm:ss');
 
             let consumer = updateOrder.consumer;
             if (consumer) {
@@ -49,8 +51,8 @@ export default class extends Component {
                 leftAstigmatismAxis: '',
                 rightAstigmatismAxis: '',
 
-                price: '',
-                orderTime: moment().format("YYYY-MM-DD hh:mm:ss"),
+                price: null,
+                orderTime: moment().format("YYYY-MM-DD HH:mm:ss"),
                 address: '',
                 payType: '',
                 orderStatus: '',
@@ -71,31 +73,31 @@ export default class extends Component {
                 // ConsumerFormPart
                 name: this.isRequired(),
                 phone: this.isPhone(),
-                // sex: this.isRequired(),
-                // channel: this.isRequired(),
-                //
-                // // DegreeFormPart
-                // leftMyopiaDegree: this.isNumber(),
-                // rightMyopiaDegree: this.isNumber(),
-                // leftAstigmatismDegree: this.isNumber(),
-                // rightAstigmatismDegree: this.isNumber(),
-                // leftAstigmatismAxis: this.isNumber(),
-                // rightAstigmatismAxis: this.isNumber(),
-                //
-                // // OrderFormPart
-                // price: this.isNumber(),
+                sex: this.isRequired(),
+                channel: this.isRequired(),
+
+                // DegreeFormPart
+                leftMyopiaDegree: this.isNumber(),
+                rightMyopiaDegree: this.isNumber(),
+                leftAstigmatismDegree: this.isNumber(),
+                rightAstigmatismDegree: this.isNumber(),
+                leftAstigmatismAxis: this.isNumber(),
+                rightAstigmatismAxis: this.isNumber(),
+
+                // OrderFormPart
+                price: this.isRequiredNumber(),
                 orderTime: {
                     isValidated: true,
                     isValid: true,
                     // YYYY-MM-DD hh:mm
                     regex: /^20\d{2}(\-\d{1,2}){2}\s+\d{2}:\d{2}(:\d{2})?$/
                 },
-                //
-                // // GlassesFormPart
-                // pupilDistance: this.isNumber(),
-                // frameAndCleadingWeight: this.isNumber(),
-                // cleadingWeight: this.isNumber(),
-                // glassesWeight: this.isNumber(),
+
+                // GlassesFormPart
+                pupilDistance: this.isNumber(),
+                frameAndCleadingWeight: this.isNumber(),
+                cleadingWeight: this.isNumber(),
+                glassesWeight: this.isNumber(),
 
             },
             canSubmit: true
@@ -123,6 +125,14 @@ export default class extends Component {
             isValidated: false,
             isValid: false,
             regex: /(^\s*$)|(^-?\d+$)|(^(-?\d+)(\.\d+)?$)/
+        }
+    };
+
+    isRequiredNumber = () => {
+        return {
+            isValidated: false,
+            isValid: false,
+            regex: /(^-?\d+$)|(^(-?\d+)(\.\d+)?$)/
         }
     };
 
@@ -190,8 +200,6 @@ export default class extends Component {
         let validation = {};
         Object.keys(this.state.validation).forEach(key => Object.assign(validation, { [key]: this.__validate__(key) }));
         let canSubmit = Object.keys(validation).map(key => validation[key].isValidated && validation[key].isValid).reduce((a, b)=> a && b);
-
-        console.log(validation, canSubmit);
 
         this.setState({ validation, canSubmit });
         if (!canSubmit) return;

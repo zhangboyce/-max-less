@@ -6,7 +6,8 @@ class MenuController extends Controller {
     async list() {
         const user = this.ctx.user;
         if (this.ctx.helper.isAdmin(user)) {
-            const menus = await this.ctx.model.Menu.find({});
+            const roleMenu = await this.ctx.model.RoleMenu.findOne({ _id: 'admin' });
+            const menus = await this.ctx.model.Menu.find({ _id: { $in: roleMenu.menus } });
             this.ctx.body = { status: true, data: menus };
         } else {
             const shopId = this.ctx.query.shopId;

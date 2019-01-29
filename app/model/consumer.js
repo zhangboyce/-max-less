@@ -8,6 +8,7 @@ module.exports = app => {
       phone: { type: String },
       sex: { type: String },
       channel: { type: String },
+      address: { type: String },
       createDate: { type: Date, default: Date.now },
   });
 

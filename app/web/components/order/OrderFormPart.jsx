@@ -1,22 +1,18 @@
 'use strict';
 import React, { Component } from 'react';
-import { Button, Card, CardHeader, CardBody, CardFooter,
-    CardText, FormGroup, FormFeedback, Input, Row, Col } from "reactstrap";
+import { Card, CardHeader, CardBody, FormFeedback, Input, Row, Col } from "reactstrap";
 import Option from "../Option";
+import DatePicker from "react-datepicker/es";
+import moment from "moment";
 
 export default class extends Component {
     constructor(props) {
         super(props);
     }
 
-    handleOrderTimeChange = (e) => {
-        let name = e.target.name;
-        if (!name) {
-            console.error('name attr cannot be empty: ', e.target);
-        }
-        let value = e.target.value;
-
-        this.props.onChange({ target: { name, value } });
+    handleOrderTimeChange = (date) => {
+        let value = moment(date).format("YYYY-MM-DD HH:mm:ss");
+        this.props.onChange({ target: { name: 'orderTime', value } });
     };
 
     render() {
@@ -37,23 +33,24 @@ export default class extends Component {
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写数字！</FormFeedback>
                             </Col>
-                            <Col className="pr-md-1" md="5">
-                                <label>下单时间</label>
-                                <Input type="text" name="orderTime"
-                                       value={ this.props.order.orderTime }
-                                       invalid={ this.props.isInvalid('orderTime') }
-                                       placeholder="YYYY-MM-DD hh:mm"
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.handleOrderTimeChange } />
-                                <FormFeedback>请填写正确下单时间！</FormFeedback>
-                            </Col>
-                            <Col className="pr-md-1" md="4">
-                                <label>邮寄地址</label>
-                                <Input type="text" name="address"
-                                       value={ this.props.order.address }
-                                       invalid={ this.props.isInvalid('address') }
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.props.onChange } />
+                            <Col className="pr-md-1" md="9">
+                                <label style={{ display: 'block' }}>下单时间</label>
+                                <DatePicker
+                                    dateFormat="yyyy-MM-dd"
+                                    className="form-control"
+                                    maxDate={ new Date() }
+                                    selected={ new Date(moment(this.props.order.orderTime).format('YYYY-MM-DD HH:mm:ss')) }
+                                    onChange={this.handleOrderTimeChange} />
+                                <DatePicker
+                                    className="form-control"
+                                    showTimeSelect
+                                    showTimeSelectOnly
+                                    timeIntervals={ 10 }
+                                    dateFormat="HH:mm"
+                                    timeFormat="HH:mm"
+                                    timeCaption="time"
+                                    selected={ new Date(moment(this.props.order.orderTime).format('YYYY-MM-DD HH:mm:ss')) }
+                                    onChange={this.handleOrderTimeChange} />
                             </Col>
                         </Row>
                         <Row>

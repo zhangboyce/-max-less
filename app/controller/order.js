@@ -5,6 +5,7 @@ class OrderController extends Controller {
     async save() {
         let order = this.ctx.request.body.order;
         let shopId = this.ctx.request.body.shopId;
+
         if (!order) {
             this.ctx.body = { status: false, msg: 'no order object.' };
             return;
@@ -18,6 +19,7 @@ class OrderController extends Controller {
             phone: order.phone,
             sex: order.sex,
             channel: order.channel,
+            address: order.address
         };
 
         let consumer = new this.ctx.model.Consumer(consumerObj);
@@ -44,6 +46,7 @@ class OrderController extends Controller {
             phone: order.phone,
             sex: order.sex,
             channel: order.channel,
+            address: order.address,
         };
         await this.ctx.model.Consumer.update({ _id: consumerId }, { $set: consumerObj });
         await this.ctx.model.Order.update({ _id: order._id }, { $set: order });
@@ -86,6 +89,9 @@ class OrderController extends Controller {
 
         const total = await this.ctx.model.Order.count(query);
 
+        let all = await this.ctx.model.Order.find(query);
+        let totalPrice = all.map(it => it.price).reduce((a, b) => a + (b ? b : 0), 0);
+
         let skip = (index - 1) * size;
         let orders = await this.ctx.model.Order.find(query).skip(skip).limit(size).sort({ createDate: -1 });
         orders = await Promise.all(orders.map(async order => {
@@ -96,7 +102,7 @@ class OrderController extends Controller {
             return order;
         }));
 
-        this.ctx.body = { status: true, result: { total, list: orders } };
+        this.ctx.body = { status: true, result: { total, totalPrice , list: orders } };
     }
 
     async delete() {

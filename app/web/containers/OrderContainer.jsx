@@ -27,6 +27,10 @@ class OrderContainer extends Component {
         this.setState({ editing: false })
     };
 
+    handleNew = () => {
+        this.setState({ editing: true })
+    };
+
     handleUpdate = order => {
         this.setState({ editing: true, order: order });
     };
@@ -38,6 +42,7 @@ class OrderContainer extends Component {
                        order={ this.state.order }
                        options={ this.props.options } />:
             <OrderList  shop={ this.props.currentShop }
+                        onNew={ this.handleNew }
                         onUpdate={ this.handleUpdate }/>;
 
         return (

@@ -29,3 +29,10 @@ export function listMenus({ shopId }) {
         });
     };
 }
+
+export function selectMenu({ menu }) {
+    return {
+        type: types.MENU_CURRENT,
+        data: menu
+    }
+}

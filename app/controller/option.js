@@ -30,6 +30,30 @@ class OptionController extends Controller {
 
         this.ctx.body = { status: true, data }
     }
+
+    async user() {
+        const user = this.ctx.user;
+        let result = {};
+        if (this.ctx.helper.isAdmin(user)) {
+            let shops = await this.ctx.model.Shop.find({});
+            shops = shops.map(shop => ({
+                name: shop.name,
+                value: shop._id
+            }));
+
+            let roles = await this.ctx.model.Role.find({});
+            roles = roles.filter(role => role._id !== 'admin');
+            roles = roles.map(role => ({
+                name: role.name,
+                value: role._id
+            }));
+
+            result.shops = shops;
+            result.roles = roles;
+        }
+
+        this.ctx.body = { status: true, result };
+    }
 }
 
 module.exports = OptionController;

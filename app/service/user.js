@@ -24,15 +24,18 @@ class UserService extends Service {
       return { status: false, msg: '用户名和密码不能为空。' };
     }
 
-    const user = await this.ctx.model.User.findOne({ username: username });
+    const user = await this.ctx.model.User.findOne({ _id: username });
     if (user) {
         return { status: false, msg: '该用户名已经被注册，请换一个独一无二的。' };
     }
 
     const hash = await bcrypt.hash(password, SALT_ROUNDS);
-    this.ctx.model.User.create({ username, password: hash });
+    this.ctx.model.User.create({ _id: username, username, password: hash });
+
     return { status: true }
   }
+
+
 }
 
 module.exports = UserService;
