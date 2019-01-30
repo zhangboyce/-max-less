@@ -209,6 +209,7 @@ export default class extends Component {
                                             <th className="text-center">镜框重量(g)</th>
                                             <th className="text-center">成品眼镜重量(g)</th>
                                             <th className="text-center">成品镜片重量(g)</th>
+                                            <th className="text-center">备注</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -249,6 +250,7 @@ export default class extends Component {
                                                     <td className="text-center">{ (parseFloat(order.frameAndCleadingWeight) - parseFloat(order.cleadingWeight)) || '' }</td>
                                                     <td className="text-center">{ order.glassesWeight  }</td>
                                                     <td className="text-center">{ (parseFloat(order.glassesWeight) - parseFloat(order.frameAndCleadingWeight) + parseFloat(order.cleadingWeight)) || '' }</td>
+                                                    <td className="text-center">{ order.remarks }</td>
                                                 </tr>
                                             ))
                                         }

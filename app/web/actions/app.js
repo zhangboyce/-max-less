@@ -12,3 +12,10 @@ export function listOptions(shopId) {
         });
     };
 }
+
+export function clickMenuLink(menu) {
+    return {
+        type: types.MENU_CLICK,
+        data: menu
+    }
+}

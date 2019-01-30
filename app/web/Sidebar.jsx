@@ -11,6 +11,7 @@ import {
     Nav,
 } from "reactstrap";
 import * as ShopActions from './actions/shop';
+import * as AppActions from './actions/app';
 
 class Sidebar extends Component {
     constructor(props) {
@@ -49,6 +50,12 @@ class Sidebar extends Component {
         };
     };
 
+    clickMenuLink = (menu) => {
+        return () => {
+            this.props.actions.clickMenuLink(menu);
+        }
+    };
+
     render() {
         let $dropdownItems = this.props.shops.map(shop => (
             <NavLink tag="li" key={ shop._id } >
@@ -82,7 +89,7 @@ class Sidebar extends Component {
                             this.props.menus.map(menu => (
                                 <li key={ menu._id }
                                     className={ this.state.currentPath === menu.path ? 'active': '' }>
-                                    <Link to={ menu.path } className="nav-link">
+                                    <Link to={ menu.path } onClick={ this.clickMenuLink(menu) } className="nav-link">
                                         <i className={ menu.icon } />
                                         <p>{ menu.name }</p>
                                     </Link>
@@ -108,7 +115,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        actions: bindActionCreators(Object.assign({}, ShopActions), dispatch)
+        actions: bindActionCreators(Object.assign({}, ShopActions, AppActions), dispatch)
     }
 };
 

@@ -4,11 +4,10 @@ import ConsumerFormPart from './ConsumerFormPart';
 import OrderFormPart from './OrderFormPart';
 import GlassesFormPart from './GlassesFormPart';
 import DegreeFormPart from './DegreeFormPart';
-import { Card, CardFooter, Button, Row, Col } from "reactstrap"
+import { Card, CardFooter,CardHeader, CardBody, Input, Button, Row, Col } from "reactstrap"
 import NotificationAlert from "react-notification-alert";
 import $ from 'jquery';
 import moment from 'moment';
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
 export default class extends Component {
@@ -31,6 +30,7 @@ export default class extends Component {
                 newOrder.phone = consumer.phone;
                 newOrder.sex = consumer.sex;
                 newOrder.channel = consumer.channel;
+                newOrder.balance = consumer.balance;
             }
             this.setState({ order: newOrder });
         }
@@ -43,6 +43,7 @@ export default class extends Component {
                 phone: '',
                 sex: '',
                 channel: '',
+                balance: 0,
 
                 leftMyopiaDegree: '',
                 rightMyopiaDegree: '',
@@ -68,6 +69,7 @@ export default class extends Component {
                 frameAndCleadingWeight: '',
                 cleadingWeight: '',
                 glassesWeight: '',
+                remarks: '',
             },
             validation: {
                 // ConsumerFormPart
@@ -75,6 +77,7 @@ export default class extends Component {
                 phone: this.isPhone(),
                 sex: this.isRequired(),
                 channel: this.isRequired(),
+                balance: this.isNumber(),
 
                 // DegreeFormPart
                 leftMyopiaDegree: this.isNumber(),
@@ -266,7 +269,27 @@ export default class extends Component {
                         options={ this.props.options } />
                 </Row>
                 <Row>
-                    <Col md="6">
+                    <Col md="12">
+                        <Card>
+                            <CardHeader>
+                                <h5 className="title">备注信息</h5>
+                            </CardHeader>
+                            <CardBody>
+                                <Row>
+                                    <Col className="pr-md-1" md="12">
+                                        <Input type="text" name="remarks"
+                                               value={ this.state.order.remarks }
+                                               invalid={ this.isInvalid('remarks') }
+                                               onBlur={ this.handleValidate }
+                                               onChange={ this.handleChange } />
+                                    </Col>
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col md="12">
                         <Card>
                             <CardFooter>
                                 <Button onClick={ this.handleSave } disabled={ !this.state.canSubmit }>保存</Button>

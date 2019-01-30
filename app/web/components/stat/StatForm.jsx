@@ -57,6 +57,7 @@ export default class extends Component {
                 weather_weather: "",
                 weather_windDirection: "",
                 weather_windPower: "",
+                remarks: "",
             },
             canSubmit: false,
             update: false
@@ -231,9 +232,25 @@ export default class extends Component {
                             </CardBody>
                         </Card>
                     </Col>
+                    <Col className="pr-md-1" md="12">
+                        <Card>
+                            <CardHeader>
+                                <h5 className="title">备注信息</h5>
+                            </CardHeader>
+                            <CardBody>
+                                <Row>
+                                    <Col className="pr-md-1" md="12">
+                                        <Input type="text" name="remarks"
+                                               value={ this.state.stat.remarks }
+                                               onChange={ this.handleChange } />
+                                    </Col>
+                                </Row>
+                            </CardBody>
+                        </Card>
+                    </Col>
                 </Row>
                 <Row>
-                    <Col md="6">
+                    <Col md="12">
                         <Card>
                             <CardFooter>
                                 <Button onClick={ this.handleSave } disabled={ !this.state.canSubmit }>保存</Button>

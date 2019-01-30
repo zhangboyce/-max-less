@@ -29,6 +29,7 @@ module.exports = app => {
       cleadingWeight: { type: String }, // 衬板的重量
       glassesWeight: { type: String }, // 眼镜的重量
       isDeleted: { type: Boolean, default: false },
+      remarks: { type: String },
       createDate: { type: Date, default: Date.now },
   });
 

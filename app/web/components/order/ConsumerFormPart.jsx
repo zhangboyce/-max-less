@@ -17,7 +17,7 @@ export default class  extends Component {
                     </CardHeader>
                     <CardBody>
                         <Row>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="3">
                                 <label>姓名</label>
                                 <Input type="text"
                                        name="name"
@@ -27,7 +27,16 @@ export default class  extends Component {
                                        value={ this.props.order.name } />
                                 <FormFeedback>客户姓名不能为空！</FormFeedback>
                             </Col>
-                            <Col className="px-md-1" md="6">
+                            <Col className="pr-md-1" md="4">
+                                <Option label="性别"
+                                        name="sex"
+                                        value={ this.props.order.sex }
+                                        onChange={ this.props.onChange }
+                                        isInvalid={ this.props.isInvalid }
+                                        onValidate={ this.props.onValidate }
+                                        options={ this.props.options['sex'] } />
+                            </Col>
+                            <Col className="px-md-1" md="5">
                                 <label>电话</label>
                                 <Input type="text"
                                        name="phone"
@@ -41,15 +50,14 @@ export default class  extends Component {
                         </Row>
                         <Row>
                             <Col className="pr-md-1" md="3">
-                                <Option label="性别"
-                                        name="sex"
-                                        value={ this.props.order.sex }
-                                        onChange={ this.props.onChange }
-                                        isInvalid={ this.props.isInvalid }
-                                        onValidate={ this.props.onValidate }
-                                        options={ this.props.options['sex'] } />
+                                <label>余额</label>
+                                <Input type="text" name="balance"
+                                       value={ this.props.order.balance }
+                                       invalid={ this.props.isInvalid('balance') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
                             </Col>
-                            <Col className="px-md-1" md="3">
+                            <Col className="px-md-1" md="4">
                                 <Option label="渠道"
                                         name="channel"
                                         value={ this.props.order.channel }
@@ -58,7 +66,7 @@ export default class  extends Component {
                                         onValidate={ this.props.onValidate }
                                         options={ this.props.options['channel'] } />
                             </Col>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="5">
                                 <label>邮寄地址</label>
                                 <Input type="text" name="address"
                                        value={ this.props.order.address }

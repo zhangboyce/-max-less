@@ -16,7 +16,7 @@ export default class  extends Component {
                     </CardHeader>
                     <CardBody>
                         <Row>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="4">
                                 <label>近视度数(左)</label>
                                 <Input type="text" name="leftMyopiaDegree"
                                        value={ this.props.order.leftMyopiaDegree }
@@ -25,18 +25,7 @@ export default class  extends Component {
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写正确的格式！</FormFeedback>
                             </Col>
-                            <Col className="pr-md-1" md="6">
-                                <label>近视度数(右)</label>
-                                <Input type="text" name="rightMyopiaDegree"
-                                       value={ this.props.order.rightMyopiaDegree }
-                                       invalid={ this.props.isInvalid('rightMyopiaDegree') }
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.props.onChange } />
-                                <FormFeedback>请填写正确的格式！</FormFeedback>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="4">
                                 <label>散光度数(左)</label>
                                 <Input type="text" name="leftAstigmatismDegree"
                                        value={ this.props.order.leftAstigmatismDegree }
@@ -45,18 +34,7 @@ export default class  extends Component {
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写正确的格式！</FormFeedback>
                             </Col>
-                            <Col className="pr-md-1" md="6">
-                                <label>散光度数(右)</label>
-                                <Input type="text" name="rightAstigmatismDegree"
-                                       value={ this.props.order.rightAstigmatismDegree }
-                                       invalid={ this.props.isInvalid('rightAstigmatismDegree') }
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.props.onChange } />
-                                <FormFeedback>请填写正确的格式！</FormFeedback>
-                            </Col>
-                        </Row>
-                        <Row>
-                            <Col className="pr-md-1" md="6">
+                            <Col className="pr-md-1" md="4">
                                 <label>散光轴位(左)</label>
                                 <Input type="text" name="leftAstigmatismAxis"
                                        value={ this.props.order.leftAstigmatismAxis }
@@ -65,7 +43,27 @@ export default class  extends Component {
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写正确的格式！</FormFeedback>
                             </Col>
-                            <Col className="pr-md-1" md="6">
+                        </Row>
+                        <Row>
+                            <Col className="pr-md-1" md="4">
+                                <label>近视度数(右)</label>
+                                <Input type="text" name="rightMyopiaDegree"
+                                       value={ this.props.order.rightMyopiaDegree }
+                                       invalid={ this.props.isInvalid('rightMyopiaDegree') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
+                                <FormFeedback>请填写正确的格式！</FormFeedback>
+                            </Col>
+                            <Col className="pr-md-1" md="4">
+                                <label>散光度数(右)</label>
+                                <Input type="text" name="rightAstigmatismDegree"
+                                       value={ this.props.order.rightAstigmatismDegree }
+                                       invalid={ this.props.isInvalid('rightAstigmatismDegree') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
+                                <FormFeedback>请填写正确的格式！</FormFeedback>
+                            </Col>
+                            <Col className="pr-md-1" md="4">
                                 <label>散光轴位(右)</label>
                                 <Input type="text" name="rightAstigmatismAxis"
                                        value={ this.props.order.rightAstigmatismAxis }
@@ -73,6 +71,17 @@ export default class  extends Component {
                                        onBlur={ this.props.onValidate }
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写正确的格式！</FormFeedback>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="pr-md-1" md="12">
+                                <label>瞳距</label>
+                                <Input type="text" name="pupilDistance"
+                                       value={ this.props.order.pupilDistance }
+                                       invalid={ this.props.isInvalid('pupilDistance') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
+                                <FormFeedback>请填写数字！</FormFeedback>
                             </Col>
                         </Row>
                     </CardBody>

@@ -55,25 +55,6 @@ export default class  extends Component {
                             </Col>
                         </Row>
                         <Row>
-                            <Col className="pr-md-1" md="6">
-                                <label>镜架</label>
-                                <Input type="text" name="glassesFrame"
-                                       value={ this.props.order.glassesFrame }
-                                       invalid={ this.props.isInvalid('glassesFrame') }
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.props.onChange } />
-                            </Col>
-                            <Col className="pr-md-1" md="6">
-                                <label>瞳距</label>
-                                <Input type="text" name="pupilDistance"
-                                       value={ this.props.order.pupilDistance }
-                                       invalid={ this.props.isInvalid('pupilDistance') }
-                                       onBlur={ this.props.onValidate }
-                                       onChange={ this.props.onChange } />
-                                <FormFeedback>请填写数字！</FormFeedback>
-                            </Col>
-                        </Row>
-                        <Row>
                             <Col className="pr-md-1" md="4">
                                 <label>镜框+衬板重量(g)</label>
                                 <Input type="text" name="frameAndCleadingWeight"
@@ -100,6 +81,16 @@ export default class  extends Component {
                                        onBlur={ this.props.onValidate }
                                        onChange={ this.props.onChange } />
                                 <FormFeedback>请填写数字！</FormFeedback>
+                            </Col>
+                        </Row>
+                        <Row>
+                            <Col className="pr-md-1" md="12">
+                                <label>镜架</label>
+                                <Input type="text" name="glassesFrame"
+                                       value={ this.props.order.glassesFrame }
+                                       invalid={ this.props.isInvalid('glassesFrame') }
+                                       onBlur={ this.props.onValidate }
+                                       onChange={ this.props.onChange } />
                             </Col>
                         </Row>
                     </CardBody>

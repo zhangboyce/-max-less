@@ -15,6 +15,7 @@ module.exports = app => {
       weather_weather: { type: String },
       weather_windDirection: { type: String },
       weather_windPower: { type: String },
+      remarks: { type: String },
       createDate: { type: Date, default: Date.now },
   });
 

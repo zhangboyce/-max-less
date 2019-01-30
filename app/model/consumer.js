@@ -9,6 +9,7 @@ module.exports = app => {
       sex: { type: String },
       channel: { type: String },
       address: { type: String },
+      balance: { type: Number, default: 0 },
       createDate: { type: Date, default: Date.now },
   });
 

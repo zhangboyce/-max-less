@@ -76,10 +76,12 @@ class StatController extends Controller {
     async list() {
         let shopId = this.ctx.query.shopId;
         let index = parseInt(this.ctx.query.index) || 1;
-        let size = parseInt(this.ctx.query.size) || 10;
+        let size = parseInt(this.ctx.query.size) || 31;
 
+        let date = moment().format('YYYY-MM-DD').split('-');
+        let dates = Array(31).fill().map((_, i) => ([date[0],date[1],(i+1 < 10) ? ('0' + (i+1)) : i+1 ].join('-')));
 
-        let query = { shopId};
+        let query = { shopId, date: { $in: dates }};
         const total = await this.ctx.model.Stat.count(query);
 
         let skip = (index - 1) * size;

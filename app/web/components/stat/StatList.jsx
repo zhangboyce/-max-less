@@ -20,7 +20,7 @@ export default class extends Component {
         this.state = {
             page: {
                 index: 1,
-                size: 10,
+                size: 31,
                 total: 0
             },
             stats: []
@@ -105,6 +105,7 @@ export default class extends Component {
                                             <th className="text-center">天气-天气状况</th>
                                             <th className="text-center">天气-风向</th>
                                             <th className="text-center">天气-风力</th>
+                                            <th className="text-center">备注</th>
                                         </tr>
                                         </thead>
                                         <tbody>
@@ -126,6 +127,7 @@ export default class extends Component {
                                                     <td className="text-center">{ stat.weather_weather }</td>
                                                     <td className="text-center">{ stat.weather_windDirection }</td>
                                                     <td className="text-center">{ stat.weather_windPower }</td>
+                                                    <td className="text-center">{ stat.remarks }</td>
                                                 </tr>
                                             ))
                                         }
@@ -136,28 +138,40 @@ export default class extends Component {
                                     this.state.page.total <=0 && '暂无统计数据!'
                                 }
                             </CardBody>
-                            <CardFooter>
-                                {
-                                    this.__totalPage__() > 1 &&
-                                    <Pagination size="sm" aria-label="Page navigation example">
-                                        <PaginationItem disabled={ this.state.page.index === 1 }>
-                                            <PaginationLink previous onClick={ this.handleChangePage(this.state.page.index - 1) } />
-                                        </PaginationItem>
-                                        {
-                                            Array(this.__totalPage__()).fill().map((_, i) => (
-                                                <PaginationItem active={ i+1 === this.state.page.index } key={i}>
-                                                    <PaginationLink onClick={ this.handleChangePage(i+1) } >
-                                                        { i + 1 }
-                                                    </PaginationLink>
-                                                </PaginationItem>
-                                            ))
-                                        }
-                                        <PaginationItem disabled={ this.state.page.index === this.__totalPage__() }>
-                                            <PaginationLink next onClick={ this.handleChangePage(this.state.page.index + 1) }  />
-                                        </PaginationItem>
-                                    </Pagination>
-                                }
-                            </CardFooter>
+                            {/*<CardFooter>*/}
+                                {/*{*/}
+                                    {/*this.__totalPage__() > 1 &&*/}
+                                    {/*<Pagination size="sm" aria-label="Page navigation example">*/}
+                                        {/*<PaginationItem disabled={ this.state.page.index === 1 }>*/}
+                                            {/*<PaginationLink previous onClick={ this.handleChangePage(this.state.page.index - 1) } />*/}
+                                        {/*</PaginationItem>*/}
+                                        {/*{*/}
+                                            {/*Array(this.__totalPage__()).fill().map((_, i) => (*/}
+                                                {/*<PaginationItem active={ i+1 === this.state.page.index } key={i}>*/}
+                                                    {/*<PaginationLink onClick={ this.handleChangePage(i+1) } >*/}
+                                                        {/*{ i + 1 }*/}
+                                                    {/*</PaginationLink>*/}
+                                                {/*</PaginationItem>*/}
+                                            {/*))*/}
+                                        {/*}*/}
+                                        {/*<PaginationItem disabled={ this.state.page.index === this.__totalPage__() }>*/}
+                                            {/*<PaginationLink next onClick={ this.handleChangePage(this.state.page.index + 1) }  />*/}
+                                        {/*</PaginationItem>*/}
+                                    {/*</Pagination>*/}
+                                {/*}*/}
+                            {/*</CardFooter>*/}
+                        </Card>
+                    </Col>
+                    <Col md="12">
+                        <Card>
+                            <CardBody>
+                                <div>
+                                    总销售额：{ this.state.stats.map( it => it.salesVolume ).reduce((a, b) => a + b, 0) }  元
+                                </div>
+                                <div>
+                                    总配镜数量：{ this.state.stats.map( it => it.salesNumber ).reduce((a, b) => a + b, 0) }  副
+                                </div>
+                            </CardBody>
                         </Card>
                     </Col>
                 </Row>

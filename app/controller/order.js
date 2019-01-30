@@ -19,7 +19,8 @@ class OrderController extends Controller {
             phone: order.phone,
             sex: order.sex,
             channel: order.channel,
-            address: order.address
+            address: order.address,
+            balance: order.balance,
         };
 
         let consumer = new this.ctx.model.Consumer(consumerObj);
@@ -46,6 +47,7 @@ class OrderController extends Controller {
             phone: order.phone,
             sex: order.sex,
             channel: order.channel,
+            balance: order.balance,
             address: order.address,
         };
         await this.ctx.model.Consumer.update({ _id: consumerId }, { $set: consumerObj });
