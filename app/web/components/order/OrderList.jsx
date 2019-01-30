@@ -14,7 +14,7 @@ export default class extends Component {
             page: {
                 index: 1,
                 size: 10,
-                total: 12
+                total: 0
             },
             orders: [],
             totalPrice: 0
@@ -34,7 +34,15 @@ export default class extends Component {
     __queryDateOptions__ = (shopId) => {
         $.get('/api/order/date/options', { shopId }, json => {
             this.setState({ dateOptions: json.result || {} });
-            this.handleChangeYear(null)();
+
+            if (this.__isAdmin__()) {
+                this.handleChangeYear(null)();
+            } else {
+                let date = new Date();
+                let currentYear = date.getFullYear();
+                let currentMonth = date.getMonth() + 1;
+                this.setState({ currentYear, currentMonth }, this.query)
+            }
         });
     };
 
@@ -112,6 +120,10 @@ export default class extends Component {
         return parseInt((this.state.page.total-1)/this.state.page.size) + 1
     };
 
+    __isAdmin__ = () => {
+        return this.props.user._id === 'admin';
+    };
+
     render() {
         return (
             <div className="content">
@@ -120,10 +132,14 @@ export default class extends Component {
                         <Card>
                             <CardBody>
                                 <div>
-                                    <Button
-                                        style={{padding: '5px 30px'}}
-                                        onClick={ this.handleChangeYear(null) }
-                                        color={ !this.state.currentYear ? 'primary' : 'info' }>全部</Button>
+                                    {
+                                        this.__isAdmin__() &&
+                                        <Button
+                                            style={{padding: '5px 30px'}}
+                                            onClick={ this.handleChangeYear(null) }
+                                            color={ !this.state.currentYear ? 'primary' : 'info' }>全部</Button>
+                                    }
+
                                     { Object.keys(this.state.dateOptions)
                                         .sort((a, b) => b - a)
                                         .map(key => (

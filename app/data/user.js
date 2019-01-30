@@ -1,7 +1,7 @@
 let users = [{
         _id: 'admin',
         username: 'admin',
-        password: '$2a$10$15hL8UL.0toQxZUxVBRSFups1FKAxS0DgyAg04mPMlZUZKP1j7fSO',
+        password: '$2a$10$IxED.AP5iP/c2UjyTMb1muFhtf4D1/pNYZvZaAX/7xqcxt3rsaeGa',
         phone: '15353535353',
         sex: 1,
     }

@@ -31,7 +31,7 @@ export default class extends Component {
                         this.setState({ canSubmit: true })
                     }
                 }
-                this.setState({ stat: json.result });
+                this.setState({ stat: json.result, canSubmit: true });
             }
         });
     };

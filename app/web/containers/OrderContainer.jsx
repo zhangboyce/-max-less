@@ -43,6 +43,7 @@ class OrderContainer extends Component {
                        options={ this.props.options } />:
             <OrderList  shop={ this.props.currentShop }
                         onNew={ this.handleNew }
+                        user={ this.props.user }
                         onUpdate={ this.handleUpdate }/>;
 
         return (
@@ -54,7 +55,8 @@ class OrderContainer extends Component {
 const mapStateToProps = state => {
     return {
         options: state.options,
-        currentShop: state.shop.current
+        currentShop: state.shop.current,
+        user: state.user,
     }
 };
 

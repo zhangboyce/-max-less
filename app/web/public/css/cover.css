@@ -64,3 +64,7 @@
 .react-datepicker__time-list-item {
     color: #0a0c0d;
 }
+
+.form-control {
+    border-color: #999;
+}

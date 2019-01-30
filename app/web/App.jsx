@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { Route, Switch, withRouter, Redirect } from "react-router-dom";
 import * as UserActions from "./actions/user";
-import HomeContainer from './containers/HomeContainer';
 import routers from './routers';
 
 class App extends Component {
@@ -27,7 +26,6 @@ class App extends Component {
                         ))
                     }
                     </Switch>
-                    {/*<Footer fluid />*/}
                 </div>
             </div>
         )
