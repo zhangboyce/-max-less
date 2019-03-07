@@ -5,7 +5,7 @@ const path = require('path');
 module.exports = appInfo => {
   const config = exports = {};
   config.keys = appInfo.name + '_1534318347853_5766';
-  config.host = 'http://192.168.60.98:7001';
+  config.host = 'http://127.0.0.1:7001';
 
   config.middleware = [ 'auth', 'admin' ];
 
@@ -15,7 +15,7 @@ module.exports = appInfo => {
       ignoreJSON: true,
     },
     // 白名单
-    domainWhiteList: [ 'http://192.168.60.98:8080' ],
+    domainWhiteList: [ 'http://127.0.0.1:7001' ],
   };
 
   config.cors = {
@@ -23,7 +23,7 @@ module.exports = appInfo => {
   };
 
   config.mongoose = {
-    url: 'mongodb://192.168.60.98:27017/max_less',
+    url: 'mongodb://127.0.0.1:27017/max_less',
     options: { useNewUrlParser: true },
   };
 
